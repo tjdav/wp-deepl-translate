@@ -69,6 +69,16 @@ function deepl_translate_handle_translation_request( $request ) {
 }
 
 /**
+ * Check if the current user has permission to access the DeepL translate API.
+ *
+ * @param WP_REST_Request $request Full data about the request.
+ * @return bool Whether the current user can access the API.
+ */
+function deepl_translate_permission_callback( $request ) {
+	return current_user_can( 'edit_posts' );
+}
+
+/**
  * Add DeepL REST route for translation endpoint
  *
  * Registers a REST API route for handling translation requests
@@ -83,7 +93,7 @@ function add_deepl_rest_route() {
 		array(
 			'methods'             => WP_REST_Server::CREATABLE,
 			'callback'            => 'deepl_translate_handle_translation_request',
-			'permission_callback' => '__return_true',
+			'permission_callback' => 'deepl_translate_permission_callback',
 			'args'                => array(
 				'text'        => array(
 					'minItems' => 1,
