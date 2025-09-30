@@ -18,15 +18,3 @@ phpcs-report.xml
 
 # Environment-specific configuration
 .env
-
-# Parent theme
-/bootscore
-bootscore.zip
-
-# Child theme dist files
-theme/assets/css/main.css
-theme/assets/css/main.css.map
-theme/assets/css/editor.css
-theme/assets/css/editor.css.map
-theme/assets/css/admin.css
-theme/assets/css/admin.css.map
