@@ -63,7 +63,7 @@ function deepl_translate_enqueue_scripts( $hook ) {
 
 	wp_enqueue_script(
 		'deepl-translate-post',
-		plugin_dir_url( __FILE__ ) . '../js/deepl-translate-post.js',
+		plugin_dir_url( __FILE__ ) . '../assets/js/deepl-translate-post.js',
 		array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-data' ),
 		'1.0',
 		true
