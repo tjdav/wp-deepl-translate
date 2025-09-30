@@ -6,6 +6,7 @@
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            Thomas David
+ * Author URI:        https://thomasjackdavid.com
  * License:           AGPL-3.0-only
  * License URI:       https://spdx.org/licenses/AGPL-3.0-only.html
  * Text Domain:       translator
