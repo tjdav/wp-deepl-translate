@@ -1,17 +1,17 @@
 <?php
 /**
- * Plugin Name:       Translate
- * Description:       Translate page content using DeepL
- * Version:           0.1.0
- * Requires at least: 6.7
- * Requires PHP:      7.4
- * Author:            Thomas David
- * Author URI:        https://thomasjackdavid.com
- * License:           AGPL-3.0-only
- * License URI:       https://spdx.org/licenses/AGPL-3.0-only.html
- * Text Domain:       translator
+ * Plugin Name:         Deepl Translate
+ * Plugin URI:          https://codeberg.org/tjdavid/wp-deepl-translate
+ * Description:         Translate page content using DeepL
+ * Version:             0.1.0
+ * Author:              Thomas David
+ * Author URI:          https://thomasjackdavid.com
+ * License:             AGPL-3.0-only
+ * License URI:         https://spdx.org/licenses/AGPL-3.0-only.html
+ * WordPress Available: yes
+ * Text Domain:         wp-deepl-translate
  *
- * @package Translator
+ * @package Deepl Translate
  */
 
 // Exit if accessed directly.
