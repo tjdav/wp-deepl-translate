@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "AGPL-3.0-only",
   "packageManager": "pnpm@10.17.1",
   "devDependencies": {
     "@wordpress/env": "^10.32.0"
