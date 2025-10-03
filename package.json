@@ -1,15 +1,21 @@
 {
   "name": "wp-deepl-translate",
   "version": "1.0.0",
+  "private": true,
   "description": "",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://codeberg.org/tjdavid/wp-deepl-translate"
+  },
+  "author": {
+    "name": "Thomas David",
+    "url": "https://thomasjackdavid.com"
+  },
   "scripts": {
     "start": "wp-env start",
     "dev": "wp-env --xdebug=develop,coverage,debug,profile",
     "stop": "wp-env stop"
   },
-  "keywords": [],
-  "author": "",
   "license": "AGPL-3.0-only",
   "packageManager": "pnpm@10.17.1",
   "devDependencies": {
