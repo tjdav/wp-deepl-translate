@@ -75,7 +75,10 @@ function deepl_translate_handle_translation_request( $request ) {
  * @return bool Whether the current user can access the API.
  */
 function deepl_translate_permission_callback( $request ) {
-	return current_user_can( 'edit_posts' );
+  $user = wp_get_current_user();
+  $allowed_roles = array('editor', 'administrator', 'author');
+  
+	return array_intersect($allowed_roles, $user->roles );
 }
 
 /**
