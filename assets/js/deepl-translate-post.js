@@ -73,6 +73,7 @@
 
       // extract all text nodes from the content
       const text = collectTextNodes(contentContainer)
+      const selectLanguage = document.getElementById('deepl-translate-languages');
 
       // send the text to the translation API
       const response = await fetch('/?rest_route=/deepl-translation/v1/translate', {
@@ -82,7 +83,7 @@
         },
         body: JSON.stringify({
           text,
-          target_lang: translateButton.dataset.targetLang
+          target_lang: selectLanguage.value
         })
       })
 
@@ -118,15 +119,14 @@
 
           // parse the translated content into blocks
           const blocks = parse(result);
+          const content = serialize(blocks)
 
           // update the editor with the translated content
-          dispatch('core/editor').editPost({
-            content: serialize(blocks)
-          });
+          dispatch('core/editor').editPost({ content });
 
           displayMessage('Translation successful!')
         } catch (error) {
-          // displayMessage('error', error.message)
+          displayMessage('error', error.message)
         }
       } else {
         displayMessage('An error occurred', 'error')

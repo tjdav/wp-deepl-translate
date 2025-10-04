@@ -40,10 +40,18 @@ function deepl_translate_render_meta_box( $post ) {
 
 	// Display the API key.
 	if ( ! empty( $deepl_api_key ) ) {
+    $deepl_client = new \DeepL\DeepLClient( $deepl_api_key );
+    $target_languages = $deepl_client->getTargetLanguages();
+    echo '<label for="deepl-translate-languages">Translate to:</label>';
+    echo '<select id="deepl-translate-languages" style="margin-bottom: 1rem;">';
+    foreach ($target_languages as $target_language) {
+      if ($target_language->supportsFormality) {
+        echo '<option value="' . $target_language->code . '">' . $target_language->name . ' (' . $target_language->code . ') </option>';
+      }
+    }
+    echo '</select>';
 		// Add a "Translate" button.
-		echo '<button type="button" id="deepl-translate-button" class="button button-primary"data-target-lang="' . esc_attr(
-			pll_get_post_language( $post->ID )
-		) . '">Translate to ' . esc_html( pll_get_post_language( $post->ID, 'name' ) ) . '</button>';
+		echo '<button type="button" id="deepl-translate-button" class="button button-primary">Translate!</button>';
 	} else {
 		echo '<p class="error">No API key configured!</p>';
 		echo '<p>Please set your API key in <a href="' . esc_attr( admin_url( 'options-general.php?page=deepl-api-key-settings' ) ) . '">Settings → API Key Manager</a></p>';
