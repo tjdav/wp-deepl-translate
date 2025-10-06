@@ -10,7 +10,7 @@
    * @returns {string[]} An array of non-empty text content strings from text nodes
    */
   function collectText(element, tagNames) {
-    const textNodes = [];
+    const content = [];
     const stack = [element];
 
     while (stack.length > 0) {
@@ -18,11 +18,11 @@
 
       // check if current node is a TextNode and not empty
       if (tagNames.includes(current.tagName)) {
-        const textContent = current.textContent.trim();
-
-        if (textContent) {
-          textNodes.push(textContent);
-        }
+        content.push(current.innerHTML);
+      } else if (current instanceof HTMLImageElement && current.alt) {
+        content.push(current.alt);
+      } else if (current.ariaLabel) {
+        content.push(current.ariaLabel);
       }
 
       // add all child nodes to stack for traversal
@@ -33,7 +33,7 @@
       }
     }
 
-    return textNodes;
+    return content;
   }
 
   /**
