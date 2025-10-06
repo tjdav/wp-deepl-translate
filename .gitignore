@@ -1,3 +1,5 @@
+dist
+
 # Docker-related files
 docker-compose.env
 .dockerignore
