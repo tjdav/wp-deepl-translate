@@ -80,6 +80,9 @@
         return;
       }
 
+      // disable translate button
+      toggleTranslateButton(translateButton)
+
       // get the current post content from the editor
       const currentContent = editor.getEditedPostAttribute('content');
       const contentContainer = document.createElement('div')
@@ -107,6 +110,9 @@
           const data = await response.json()
 
           if (data.status !== 'success') {
+            // reset translate button
+            toggleTranslateButton(translateButton)
+
             return displayMessage(data.message, 'error')
           }
 
@@ -140,11 +146,20 @@
           dispatch('core/editor').editPost({ content });
 
           displayMessage('Translation successful!')
+
+          // reset translate button
+          toggleTranslateButton(translateButton)
         } catch (error) {
           displayMessage('error', error.message)
+
+          // reset translate button
+          toggleTranslateButton(translateButton)
         }
       } else {
         displayMessage('An error occurred', 'error')
+
+        // reset translate button
+        toggleTranslateButton(translateButton)
       }
     })
   }
