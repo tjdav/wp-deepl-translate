@@ -74,7 +74,7 @@
 
   const translateButton = document.getElementById('deepl-translate-button');
 
-  if (translateButton) {
+  if (translateButton instanceof HTMLButtonElement) {
     translateButton.addEventListener('click', async () => {
       const editor = select('core/editor');
 
