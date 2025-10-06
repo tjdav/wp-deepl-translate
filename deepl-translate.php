@@ -3,7 +3,7 @@
  * Plugin Name:         Deepl Translate
  * Plugin URI:          https://codeberg.org/tjdavid/wp-deepl-translate
  * Description:         Translate page content using DeepL
- * Version:             0.1.0
+ * Version:             0.0.2
  * Author:              Thomas David
  * Author URI:          https://thomasjackdavid.com
  * License:             AGPL-3.0-only
