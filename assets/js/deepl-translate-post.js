@@ -1,13 +1,15 @@
 (() => {
   const { select, dispatch } = wp.data;
   const { parse, serialize } = wp.blocks;
+  const tagNames = ['P', 'A', 'BUTTON', 'UL', 'OL', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TABLE', 'LEGEND', 'LABEL', 'ADDRESS', 'FORM', 'PRE']
 
   /**
-   * Collects all non-empty text nodes from an element and its descendants
+   * Collects all text from target elements
    * @param {Element} element - The element to traverse for text nodes
+   * @param {string[]} tagNames - Array of tag names to extract text from
    * @returns {string[]} An array of non-empty text content strings from text nodes
    */
-  function collectTextNodes(element) {
+  function collectText(element, tagNames) {
     const textNodes = [];
     const stack = [element];
 
@@ -15,7 +17,7 @@
       const current = stack.pop();
 
       // check if current node is a TextNode and not empty
-      if (current.nodeType === Node.TEXT_NODE) {
+      if (tagNames.includes(current.tagName)) {
         const textContent = current.textContent.trim();
 
         if (textContent) {
@@ -24,9 +26,9 @@
       }
 
       // add all child nodes to stack for traversal
-      if (current.childNodes) {
-        for (let i = current.childNodes.length - 1; i >= 0; i--) {
-          stack.push(current.childNodes[i]);
+      if (current.children) {
+        for (let i = current.children.length - 1; i >= 0; i--) {
+          stack.push(current.children[i]);
         }
       }
     }
@@ -90,7 +92,7 @@
       contentContainer.innerHTML = currentContent
 
       // extract all text nodes from the content
-      const text = collectTextNodes(contentContainer)
+      const text = collectText(contentContainer, tagNames)
       const selectLanguage = document.getElementById('deepl-translate-languages');
 
       // send the text to the translation API
