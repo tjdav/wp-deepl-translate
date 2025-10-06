@@ -5,9 +5,9 @@
    */
 
   // @ts-ignore
-  const { select, dispatch } = wp.data;
+  const { select, dispatch } = wp.data
   // @ts-ignore
-  const { parse, serialize } = wp.blocks;
+  const { parse, serialize } = wp.blocks
   const TAG_NAMES = ['P', 'A', 'BUTTON', 'UL', 'OL', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TABLE', 'LEGEND', 'LABEL', 'ADDRESS', 'FORM', 'PRE']
 
   /**
@@ -16,41 +16,52 @@
    * @param {string[]} tagNames - Array of tag names to extract text from
    * @returns {string[]} An array of non-empty text content strings from text nodes
    */
-  function collectText(element, tagNames) {
-    const content = [];
-    const stack = [element];
+  function collectText (element, tagNames) {
+    const content = []
+    const stack = [element]
 
     while (stack.length > 0) {
-      const current = stack.pop();
+      const current = stack.pop()
 
       // check if current node is a TextNode and not empty
       if (tagNames.includes(current.tagName)) {
-        content.push(current.innerHTML);
-      } else if (current instanceof HTMLImageElement && current.alt) {
-        content.push(current.alt);
-      } else if (current.ariaLabel) {
-        content.push(current.ariaLabel);
-      }
+        const innerHTMl = current.innerHTML
 
-      // add all child nodes to stack for traversal
-      if (current.children) {
-        for (let i = current.children.length - 1; i >= 0; i--) {
-          stack.push(current.children[i]);
+        if (innerHTMl.trim()) {
+          content.push(current.innerHTML)
+        }
+      } else if (
+        current instanceof HTMLImageElement
+        && current.alt
+        && current.alt.trim()
+      ) {
+        content.push(current.alt)
+      } else if (
+        current.ariaLabel
+        && current.ariaLabel.trim()
+      ) {
+        content.push(current.ariaLabel)
+      } else {
+        // add all children to stack for traversal
+        if (current.children) {
+          for (let i = current.children.length - 1; i >= 0; i--) {
+            stack.push(current.children[i])
+          }
         }
       }
     }
 
-    return content;
+    return content
   }
 
   /**
    * Displays a message in the designated message element with the specified type.
-   * 
+   *
    * @param {string} message - The message text to display
    * @param {string} [type='success'] - The type of message (e.g., 'success', 'error', 'warning')
    * @param {number} [timeout=5000] - The notice timeout length
    */
-  function displayMessage(message, type = 'success', timeout = 5000) {
+  function displayMessage (message, type = 'success', timeout = 5000) {
     const boxElement = document.querySelector('#deepl_translate_box .inside')
     const displayMessageElement = document.createElement('div')
 
@@ -66,10 +77,10 @@
 
   /**
    * Toggles the state of a translate button between enabled and disabled states.
-   * 
+   *
    * @param {HTMLButtonElement} btn - The button element to toggle
    */
-  function toggleTranslateButton(btn) {
+  function toggleTranslateButton (btn) {
     if (!btn.disabled) {
       btn.disabled = true
       btn.textContent = 'Translating...'
@@ -79,28 +90,28 @@
     }
   }
 
-  const translateButton = document.getElementById('deepl-translate-button');
+  const translateButton = document.getElementById('deepl-translate-button')
 
   if (translateButton instanceof HTMLButtonElement) {
     translateButton.addEventListener('click', async () => {
-      const editor = select('core/editor');
+      const editor = select('core/editor')
 
       if (!editor || !editor.getEditedPostAttribute) {
-        return;
+        return
       }
 
       // disable translate button
       toggleTranslateButton(translateButton)
 
       // get the current post content from the editor
-      const currentContent = editor.getEditedPostAttribute('content');
+      const currentContent = editor.getEditedPostAttribute('content')
       const contentContainer = document.createElement('div')
 
       contentContainer.innerHTML = currentContent
 
       // extract all text nodes from the content
       const text = collectText(contentContainer, TAG_NAMES)
-      const selectLanguage = document.getElementById('deepl-translate-languages');
+      const selectLanguage = document.getElementById('deepl-translate-languages')
 
       // send the text to the translation API
       const response = await fetch('/?rest_route=/deepl-translation/v1/translate', {
@@ -133,7 +144,7 @@
 
           // process each translation and reconstruct the content
           for (let i = 0; i < data.translations.length; i++) {
-            const { translation, original_text } = data.translations[i];
+            const { translation, original_text } = data.translations[i]
             const indexOf = originalContent.indexOf(original_text)
 
             // add the portion of content before the translation
@@ -154,11 +165,11 @@
           }
 
           // parse the translated content into blocks
-          const blocks = parse(result);
+          const blocks = parse(result)
           const content = serialize(blocks)
 
           // update the editor with the translated content
-          dispatch('core/editor').editPost({ content });
+          dispatch('core/editor').editPost({ content })
 
           displayMessage('Translation successful!')
 
@@ -178,4 +189,4 @@
       }
     })
   }
-})();
+})()
