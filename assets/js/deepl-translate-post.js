@@ -1,5 +1,12 @@
 (() => {
+  /**
+   * @import {dispatch, select} from '@wordpress/data'
+   * @import {parse, serialize} from '@wordpress/blocks'
+   */
+
+  // @ts-ignore
   const { select, dispatch } = wp.data;
+  // @ts-ignore
   const { parse, serialize } = wp.blocks;
   const TAG_NAMES = ['P', 'A', 'BUTTON', 'UL', 'OL', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TABLE', 'LEGEND', 'LABEL', 'ADDRESS', 'FORM', 'PRE']
 
@@ -103,6 +110,7 @@
         },
         body: JSON.stringify({
           text,
+          // @ts-ignore
           target_lang: selectLanguage.value
         })
       })
