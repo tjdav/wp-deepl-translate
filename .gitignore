@@ -1,5 +1,6 @@
 dist
 *.zip
+.eslintcache
 
 # Docker-related files
 docker-compose.env
