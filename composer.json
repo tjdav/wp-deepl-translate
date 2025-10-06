@@ -1,12 +1,17 @@
 {
-    "require": {
-        "deeplcom/deepl-php": "^1.12",
-        "symfony/http-client": "^7.3",
-        "nyholm/psr7": "^1.8"
-    },
-    "config": {
-        "allow-plugins": {
-            "php-http/discovery": true
-        }
+  "require-dev": {
+    "wp-coding-standards/wpcs": "^3.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.1"
+  },
+  "require": {
+    "deeplcom/deepl-php": "^1.12",
+    "symfony/http-client": "^7.3",
+    "nyholm/psr7": "^1.8"
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
+  }
 }
