@@ -10,19 +10,32 @@
     "name": "Thomas David",
     "url": "https://thomasjackdavid.com"
   },
+  "type": "module",
   "scripts": {
     "start": "wp-env start",
     "dev": "wp-env start --debug --xdebug=develop,coverage,debug,profile",
     "stop": "wp-env stop",
-    "test": "wp-env run tests-cli --env-cwd=wp-content/plugins/wp-deepl-translate phpunit",
-    "composer": "wp-env run cli --env-cwd=wp-content/plugins/wp-deepl-translate composer"
+    "build": "wp-env run cli --env-cwd=wp-content/plugins/wp-deepl-translate composer install --no-dev --optimize-autoloader",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "lint-format": "eslint --cache --fix .",
+    "lint": "eslint --cache ."
   },
+  "files": [
+    "vendor",
+    "includes",
+    "admin",
+    "public",
+    "deepl-translate.php",
+    "uninstall.php"
+  ],
   "license": "AGPL-3.0-only",
   "packageManager": "pnpm@10.18.1",
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.4.0",
     "@wordpress/blocks": "^15.5.0",
     "@wordpress/data": "^10.32.0",
     "@wordpress/env": "^10.32.0",
-    "@wordpress/scripts": "^30.25.0"
+    "@wordpress/scripts": "^30.25.0",
+    "eslint": "^9.37.0"
   }
 }
