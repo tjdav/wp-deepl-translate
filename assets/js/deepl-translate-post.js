@@ -1,7 +1,7 @@
 (() => {
   const { select, dispatch } = wp.data;
   const { parse, serialize } = wp.blocks;
-  const tagNames = ['P', 'A', 'BUTTON', 'UL', 'OL', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TABLE', 'LEGEND', 'LABEL', 'ADDRESS', 'FORM', 'PRE']
+  const TAG_NAMES = ['P', 'A', 'BUTTON', 'UL', 'OL', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TABLE', 'LEGEND', 'LABEL', 'ADDRESS', 'FORM', 'PRE']
 
   /**
    * Collects all text from target elements
@@ -92,7 +92,7 @@
       contentContainer.innerHTML = currentContent
 
       // extract all text nodes from the content
-      const text = collectText(contentContainer, tagNames)
+      const text = collectText(contentContainer, TAG_NAMES)
       const selectLanguage = document.getElementById('deepl-translate-languages');
 
       // send the text to the translation API
