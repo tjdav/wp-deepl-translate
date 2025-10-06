@@ -143,7 +143,7 @@
             originalContent = originalContent.slice(indexOf + original_text.length + offset)
 
             // adjust offset if translation is longer than original text
-            if (translation.length > originalContent.length) {
+            if (translation.length > original_text.length) {
               offset += translation.length - original_text.length
             }
           }
