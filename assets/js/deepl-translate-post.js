@@ -55,6 +55,21 @@
     }, timeout)
   }
 
+  /**
+   * Toggles the state of a translate button between enabled and disabled states.
+   * 
+   * @param {HTMLButtonElement} btn - The button element to toggle
+   */
+  function toggleTranslateButton(btn) {
+    if (!btn.disable) {
+      btn.disable = true
+      btn.textContent = 'Translating...'
+    } else {
+      btn.disable = false
+      btn.textContent = 'Translate!'
+    }
+  }
+
   const translateButton = document.getElementById('deepl-translate-button');
 
   if (translateButton) {
