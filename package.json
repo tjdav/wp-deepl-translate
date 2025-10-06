@@ -18,8 +18,10 @@
     "composer": "wp-env run cli --env-cwd=wp-content/plugins/wp-deepl-translate composer"
   },
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.17.1",
+  "packageManager": "pnpm@10.18.1",
   "devDependencies": {
+    "@wordpress/blocks": "^15.5.0",
+    "@wordpress/data": "^10.32.0",
     "@wordpress/env": "^10.32.0"
   }
 }
