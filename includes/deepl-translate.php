@@ -40,16 +40,32 @@ function deepl_translate_render_meta_box( $post ) {
 
 	// Display the API key.
 	if ( ! empty( $deepl_api_key ) ) {
-    $deepl_client = new \DeepL\DeepLClient( $deepl_api_key );
-    $target_languages = $deepl_client->getTargetLanguages();
-    echo '<label for="deepl-translate-languages">Translate to:</label>';
-    echo '<select id="deepl-translate-languages" style="margin-bottom: 1rem;">';
-    foreach ($target_languages as $target_language) {
-      if ($target_language->supportsFormality) {
-        echo '<option value="' . $target_language->code . '">' . $target_language->name . ' (' . $target_language->code . ') </option>';
-      }
-    }
-    echo '</select>';
+		$deepl_client     = new \DeepL\DeepLClient( $deepl_api_key );
+		$target_languages = $deepl_client->getTargetLanguages();
+
+		echo '<label for="deepl-translate-languages">Translate to:</label>';
+		echo '<select id="deepl-translate-languages" style="margin-bottom: 1rem;">';
+
+		$has_english    = false;
+		$select_options = '';
+
+		foreach ( $target_languages as $target_language ) {
+			if ( $target_language->supportsFormality ) {
+				if ( 'EN-GB' === $target_language->code || 'EN-US' === $target_language->code ) {
+					$has_english = true;
+				}
+
+				$select_options .= '<option value="' . $target_language->code . '">' . $target_language->name . ' (' . $target_language->code . ') </option>';
+			}
+		}
+
+		if ( ! $has_english ) {
+			echo '<option value="EN-GB">English (EN-GB)</option>';
+			echo '<option value="EN-US">English (EN-US)</option>';
+		}
+
+		echo wp_kses( $select_options, array( 'option' => array( 'value' => array() ) ) );
+		echo '</select>';
 		// Add a "Translate" button.
 		echo '<button type="button" id="deepl-translate-button" class="button button-primary">Translate!</button>';
 	} else {
