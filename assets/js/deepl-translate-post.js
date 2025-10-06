@@ -119,18 +119,23 @@
           // initialize variables for reconstructing the translated content
           let result = ''
           let originalContent = currentContent
+          let offset = 0
 
           // process each translation and reconstruct the content
           for (let i = 0; i < data.translations.length; i++) {
             const { translation, original_text } = data.translations[i];
             const indexOf = originalContent.indexOf(original_text)
-            const textLength = translation.length < original_text.length ? translation.length : original_text.length
 
             // add the portion of content before the translation
             result += originalContent.slice(0, indexOf) + translation
 
             // update the remaining content to process
-            originalContent = originalContent.slice(indexOf + textLength)
+            originalContent = originalContent.slice(indexOf + original_text.length + offset)
+
+            // adjust offset if translation is longer than original text
+            if (translation.length > originalContent.length) {
+              offset += translation.length - original_text.length
+            }
           }
 
           // add any remaining content that wasn't translated
