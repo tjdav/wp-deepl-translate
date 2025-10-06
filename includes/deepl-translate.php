@@ -50,7 +50,7 @@ function deepl_translate_render_meta_box( $post ) {
 		$select_options = '';
 
 		foreach ( $target_languages as $target_language ) {
-			if ( $target_language->supportsFormality ) {
+			if ( $target_language->supportsFormality ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
 				if ( 'EN-GB' === $target_language->code || 'EN-US' === $target_language->code ) {
 					$has_english = true;
 				}
