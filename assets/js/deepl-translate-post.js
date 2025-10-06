@@ -63,11 +63,11 @@
    * @param {HTMLButtonElement} btn - The button element to toggle
    */
   function toggleTranslateButton(btn) {
-    if (!btn.disable) {
-      btn.disable = true
+    if (!btn.disabled) {
+      btn.disabled = true
       btn.textContent = 'Translating...'
     } else {
-      btn.disable = false
+      btn.disabled = false
       btn.textContent = 'Translate!'
     }
   }
