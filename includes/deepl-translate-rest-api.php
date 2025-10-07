@@ -37,7 +37,9 @@ function deepl_translate_handle_translation_request( $request ) {
 		// Process each text.
 		foreach ( $texts as $text ) {
 			if ( ! empty( $text ) ) {
-				$result         = $deepl_client->translateText( $text, null, $target_lang );
+				$result         = $deepl_client->translateText( $text, null, $target_lang, array(
+          'tag_handling' => 'html'
+        ) );
 				$translations[] = array(
 					'original_text'        => $text,
 					'detected_source_lang' => $result->detectedSourceLang, // @phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase          
