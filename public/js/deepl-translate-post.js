@@ -16,7 +16,7 @@
    * @param {string[]} tagNames - Array of tag names to extract text from
    * @returns {string[]} An array of non-empty text content strings from text nodes
    */
-  function collectText (element, tagNames) {
+  function collectText(element, tagNames) {
     const content = []
     const stack = [element]
 
@@ -61,7 +61,7 @@
    * @param {string} [type='success'] - The type of message (e.g., 'success', 'error', 'warning')
    * @param {number} [timeout=5000] - The notice timeout length
    */
-  function displayMessage (message, type = 'success', timeout = 5000) {
+  function displayMessage(message, type = 'success', timeout = 5000) {
     const boxElement = document.querySelector('#deepl_translate_box .inside')
     const displayMessageElement = document.createElement('div')
 
@@ -80,7 +80,7 @@
    *
    * @param {HTMLButtonElement} btn - The button element to toggle
    */
-  function toggleTranslateButton (btn) {
+  function toggleTranslateButton(btn) {
     if (!btn.disabled) {
       btn.disabled = true
       btn.textContent = 'Translating...'
@@ -140,7 +140,6 @@
           // initialize variables for reconstructing the translated content
           let result = ''
           let originalContent = currentContent
-          let offset = 0
 
           // process each translation and reconstruct the content
           for (let i = 0; i < data.translations.length; i++) {
@@ -151,12 +150,7 @@
             result += originalContent.slice(0, indexOf) + translation
 
             // update the remaining content to process
-            originalContent = originalContent.slice(indexOf + original_text.length + offset)
-
-            // adjust offset if translation is longer than original text
-            if (translation.length > original_text.length) {
-              offset += translation.length - original_text.length
-            }
+            originalContent = originalContent.slice(indexOf + original_text.length)
           }
 
           // add any remaining content that wasn't translated
